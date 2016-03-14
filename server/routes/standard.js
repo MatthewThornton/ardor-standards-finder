@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var Note = require('../models/note')
+var Note = require('../models/standard')
 
 module.exports = function(app) {
   app.get('/standards', function(req, res) {
