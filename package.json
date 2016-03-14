@@ -2,7 +2,7 @@
   "name": "math-finder",
   "private": true,
   "version": "0.0.0",
-  "description": "A math Finder App",
+  "description": "A Math Finder App",
   "repository": "https://github.com/MatthewThornton/ardor-standards-finder.git",
   "license": "MIT",
   "dependencies": {

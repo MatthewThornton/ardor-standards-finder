@@ -1,5 +1,5 @@
 {
-  "name": "note-wrangler",
+  "name": "math-finder",
   "version": "0.0.0",
   "dependencies": {
     "body-parser": {

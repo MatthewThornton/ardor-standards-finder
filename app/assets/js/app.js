@@ -1,2 +1,1 @@
-angular.module('MathFinder', ['ngRoute', 'ngResource']).config(function(){
-});
+angular.module('MathFinder', ['ngRoute', 'ngResource']);

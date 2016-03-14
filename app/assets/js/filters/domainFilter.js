@@ -1,4 +1,4 @@
-angular.module("MathFInder").filter('domainFilter', function(){
+angular.module("MathFinder").filter('domainFilter', function(){
   return function(collection, domain){
     var newCollection = [];
 

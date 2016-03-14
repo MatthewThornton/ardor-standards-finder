@@ -1,4 +1,4 @@
-angular.module('MathFinder').directive("mfDomainSelector", function(Category){
+angular.module('MathFinder').directive("mfDomainSelector", function(Domain){
   return {
     replace: true,
     restrict: "E",
