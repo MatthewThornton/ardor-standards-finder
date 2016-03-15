@@ -10,7 +10,8 @@ app.get('/', function(req, res){
 });
 
 // Load routes
-require('./routes/standard')(app); // note routes
-require('./routes/domain')(app); // category routes
+require('./routes/course')(app); //course routes
+require('./routes/standard')(app); // standard routes
+require('./routes/domain')(app); // domain routes
 
 module.exports = app;

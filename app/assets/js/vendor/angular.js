@@ -4921,7 +4921,7 @@ function Browser(window, document, $log, $sniffer) {
 
   /**
    * @private
-   * Note: this method is used only by scenario runner
+   * Standard: this method is used only by scenario runner
    * TODO(vojta): prefix this method with $$ ?
    * @param {function()} callback Function that will be called when no outstanding request
    */
@@ -6930,7 +6930,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           // (or a child element inside of them)
           // might change, so we need to recreate the namespace adapted compileNodes
           // for call to the link function.
-          // Note: This will already clone the nodes...
+          // Standard: This will already clone the nodes...
           $linkNode = jqLite(
             wrapTemplate(namespace, jqLite('<div>').append($compileNodes).html())
           );
@@ -7729,7 +7729,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         }
 
         // This is the function that is injected as `$transclude`.
-        // Note: all arguments are optional!
+        // Standard: all arguments are optional!
         function controllersBoundTransclude(scope, cloneAttachFn, futureParentElement) {
           var transcludeControllers;
 
@@ -10934,7 +10934,7 @@ var locationPrototype = {
    *
    * Change path when called with parameter and return `$location`.
    *
-   * Note: Path should always begin with forward slash (/), this method will add the forward slash
+   * Standard: Path should always begin with forward slash (/), this method will add the forward slash
    * if it is missing.
    *
    *
@@ -11579,7 +11579,7 @@ function $LogProvider() {
           logFn = console[type] || console.log || noop,
           hasApply = false;
 
-      // Note: reading logFn.apply throws an error in IE11 in IE8 document mode.
+      // Standard: reading logFn.apply throws an error in IE11 in IE8 document mode.
       // The reason behind this is that console.log has type "object" in IE8...
       try {
         hasApply = !!logFn.apply;
@@ -14312,7 +14312,7 @@ function $RootScopeProvider() {
        * Application code can register a `$destroy` event handler that will give it a chance to
        * perform any necessary cleanup.
        *
-       * Note that, in AngularJS, there is also a `$destroy` jQuery event, which can be used to
+       * Standard that, in AngularJS, there is also a `$destroy` jQuery event, which can be used to
        * clean up DOM bindings before an element is removed from the DOM.
        */
       $destroy: function() {
@@ -14992,7 +14992,7 @@ function $SceDelegateProvider() {
    *     Follow {@link ng.$sce#resourceUrlPatternItem this link} for a description of the items
    *     allowed in this array.
    *
-   *     Note: **an empty whitelist array will block all URLs**!
+   *     Standard: **an empty whitelist array will block all URLs**!
    *
    * @return {Array} the currently set whitelist array.
    *
@@ -15525,7 +15525,7 @@ function $SceProvider() {
   };
 
 
-  /* Design notes on the default implementation for SCE.
+  /* Design standards on the default implementation for SCE.
    *
    * The API contract for the SCE delegate
    * -------------------------------------
@@ -19569,7 +19569,7 @@ function textInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 function baseInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   var type = lowercase(element[0].type);
 
-  // In composition mode, users are still inputing intermediate text buffer,
+  // In composition mode, courses are still inputing intermediate text buffer,
   // hold the listener until composition is done.
   // More about composition events: https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
   if (!$sniffer.android) {
@@ -19745,7 +19745,7 @@ function createDateInputType(type, regexp, parseDate, format) {
     ctrl.$parsers.push(function(value) {
       if (ctrl.$isEmpty(value)) return null;
       if (regexp.test(value)) {
-        // Note: We cannot read ctrl.$modelValue, as there might be a different
+        // Standard: We cannot read ctrl.$modelValue, as there might be a different
         // parser/formatter in the processing chain so that the model
         // contains some different data format!
         var parsedDate = parseDate(value, previousDate);
@@ -19877,7 +19877,7 @@ function numberInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 }
 
 function urlInputType(scope, element, attr, ctrl, $sniffer, $browser) {
-  // Note: no badInputChecker here by purpose as `url` is only a validation
+  // Standard: no badInputChecker here by purpose as `url` is only a validation
   // in browsers, i.e. we can always read out input.value even if it is not valid!
   baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
   stringBasedInputType(ctrl);
@@ -19890,7 +19890,7 @@ function urlInputType(scope, element, attr, ctrl, $sniffer, $browser) {
 }
 
 function emailInputType(scope, element, attr, ctrl, $sniffer, $browser) {
-  // Note: no badInputChecker here by purpose as `url` is only a validation
+  // Standard: no badInputChecker here by purpose as `url` is only a validation
   // in browsers, i.e. we can always read out input.value even if it is not valid!
   baseInputType(scope, element, attr, ctrl, $sniffer, $browser);
   stringBasedInputType(ctrl);
@@ -21902,7 +21902,7 @@ var ngIfDirective = ['$animate', function($animate) {
               $transclude(function(clone, newScope) {
                 childScope = newScope;
                 clone[clone.length++] = document.createComment(' end ngIf: ' + $attr.ngIf + ' ');
-                // Note: We only need the first/last node of the cloned nodes.
+                // Standard: We only need the first/last node of the cloned nodes.
                 // However, we need to keep the reference to the jqlite wrapper as it might be changed later
                 // by a directive with templateUrl when its template arrives.
                 block = {
@@ -22164,10 +22164,10 @@ var ngIncludeDirective = ['$templateRequest', '$anchorScroll', '$animate', '$sce
               var newScope = scope.$new();
               ctrl.template = response;
 
-              // Note: This will also link all children of ng-include that were contained in the original
+              // Standard: This will also link all children of ng-include that were contained in the original
               // html. If that content contains controllers, ... they could pollute/change the scope.
               // However, using ng-include on an element with additional content does not make sense...
-              // Note: We can't remove them in the cloneAttchFn of $transclude as that
+              // Standard: We can't remove them in the cloneAttchFn of $transclude as that
               // function is called before linking the content, which would apply child
               // directives to non existing elements.
               var clone = $transclude(newScope, function(clone) {
@@ -22930,7 +22930,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     }
 
     var viewValue = ctrl.$$lastCommittedViewValue;
-    // Note: we use the $$rawModelValue as $modelValue might have been
+    // Standard: we use the $$rawModelValue as $modelValue might have been
     // set to undefined during a view -> model update that found validation
     // errors. We can't parse the view here, since that could change
     // the model although neither viewValue nor the model on the scope changed
@@ -22949,7 +22949,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
       // If there was no change in validity, don't update the model
       // This prevents changing an invalid modelValue to undefined
       if (!allowInvalid && prevValid !== allValid) {
-        // Note: Don't check ctrl.$valid here, as we could have
+        // Standard: Don't check ctrl.$valid here, as we could have
         // external validators (e.g. calculated on the server),
         // that just call $setValidity and need the model value
         // to calculate their validity.
@@ -23115,7 +23115,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     // This can happen if e.g. $setViewValue is called from inside a parser
     ctrl.$$runValidators(parserValid, modelValue, ctrl.$$lastCommittedViewValue, function(allValid) {
       if (!allowInvalid) {
-        // Note: Don't check ctrl.$valid here, as we could have
+        // Standard: Don't check ctrl.$valid here, as we could have
         // external validators (e.g. calculated on the server),
         // that just call $setValidity and need the model value
         // to calculate their validity.
@@ -23177,7 +23177,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * All these actions will be debounced if the {@link ng.directive:ngModelOptions ngModelOptions}
    * directive is used with a custom debounce for this particular event.
    *
-   * Note that calling this function does not trigger a `$digest`.
+   * Standard that calling this function does not trigger a `$digest`.
    *
    * @param {string} value Value from the view.
    * @param {string} trigger Event that triggered the update.
@@ -23220,7 +23220,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   };
 
   // model -> value
-  // Note: we cannot use a normal scope.$watch as we want to detect the following:
+  // Standard: we cannot use a normal scope.$watch as we want to detect the following:
   // 1. scope value is 'a'
   // 2. user enters 'b'
   // 3. ng-change kicks in and reverts scope value to 'a'
@@ -24438,7 +24438,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
                 // TODO(perf): support naked previousNode in `enter` to avoid creation of jqLite wrapper?
                 $animate.enter(clone, null, jqLite(previousNode));
                 previousNode = endNode;
-                // Note: We only need the first/last node of the cloned nodes.
+                // Standard: We only need the first/last node of the cloned nodes.
                 // However, we need to keep the reference to the jqlite wrapper as it might be changed later
                 // by a directive with templateUrl when its template arrives.
                 block.clone = clone;

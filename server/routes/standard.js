@@ -23,8 +23,8 @@ module.exports = function(app) {
   });
 
   app.get('/standards/:id', function(req, res) {
-    var standardId = parseInt(req.param('id'), 10);
-    res.json(Standard.get(standardId) || {});
+    var noteId = parseInt(req.param('id'), 10);
+    res.json(Standard.get(noteId) || {});
   });
 
   app.delete('/standards/:id', function(req, res) {

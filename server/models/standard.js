@@ -1,38 +1,90 @@
 var _ = require('lodash');
-var Domain = require('./domain')
-
-var std = [
-  {"id":1, "domainId": 1, "description": "NgModel Best Practice", "content" : "Always use dot syntax when using NgModel! Treat Scope as read-only in templates & write-only in controllers. The purpose of the scope is to refer to the model, not be the model. The model is your javascript objects. When doing bidirectional binding with ngModel make sure you don't bind directly to the scope properties. This will cause unexpected behavior in the child scopes.", "title" : "NgModel BP"},
-  {"id":2, "domainId": 3, "description" : "Markers on a **DOM element** that tell AngularJS's HTML compiler `$compile` to attach a specified behavior to that DOM element.", "title" : "Directives", "content": "Markers on a **DOM element**"},
-  {"id":3, "domainId": 2, "description" : "Clarify the confusion between Service the term and `service` the angular method and to explain the 5 different Service recipes in Angular.", "title" : "Service Service? Really Angular?","content": "There are 5 Recipes used to create a Service. One of those *was* unfortunately named, Service. So yes, amongst its fellow peers such as Provider Service and Factory Service, there is in fact a Service Service."},
-  {"id":4 , "domainId": 2, "description" : "QUESTIONABLE DESCRIPTION GOES HERE", "title" : "TEST TEST TEST", "content": "QUESTIONABLE CONTENT GOES HERE"},
-  {"id":5 ,"domainId": 4, "description" : "Define Service", "title" : "What is a Service", "content": "Service: Angular services are objects that are wired together using dependency injection (DI). You can use services to organize and share code across your app."},
-  {"id":6 ,"domainId": 5,  "description" : "Steps for Creating a Service", "title" : "How do you create a Service?", "content": "You can register a service to our Angular module `app` with a one of the following 5 recipes: \\n 	- **factory**  \\n 	- **provider**  \\n 	- **service**  \\n 	- **value**  \\n 	- **constant** "}
-]
-var lastId = 6;
+var Domain = require('./domain');
+var Course = require('./course');
+var standards = [
+  {
+    "id": 1, "courseId": 7, "domainId": 3,
+    "title": "Use properties of operations to generate equivalent expressions.",
+    "standardId": "CCSS.MATH.CONTENT.7.EE.A.1",
+    "description": "Apply properties of operations as strategies to add, subtract, factor, and expand linear expressions with rational coefficients."
+  },
+  {
+    "id": 2, "courseId": 7, "domainId": 3,
+    "title": "Use properties of operations to generate equivalent expressions.",
+    "standardId": "CCSS.MATH.CONTENT.7.EE.A.2",
+    "description": "Understand that rewriting an expression in different forms in a problem context can shed light on the problem and how the quantities in it are related. For example, a + 0.05a = 1.05a means that 'increase by 5%' is the same as 'multiply by 1.05'."
+  },
+  {
+    "id": 3, "courseId": 7, "domainId": 1,
+    "title": "Analyze proportional relationships and use them to solve real-world and mathematical problems.",
+    "standardId": "CCSS.MATH.CONTENT.7.RP.A.1",
+    "description": "Compute unit rates associated with ratios of fractions, including ratios of lengths, areas and other quantities measured in like or different units. For example, if a person walks 1/2 mile in each 1/4 hour, compute the unit rate as the complex fraction 1/2/1/4 miles per hour, equivalently 2 miles per hour."
+  },
+  {
+    "id": 4, "courseId": 7, "domainId": 4,
+    "title": "Draw construct, and describe geometrical figures and describe the relationships between them.",
+    "standardId": "CCSS.MATH.CONTENT.7.G.A.1",
+    "description": "Solve problems involving scale drawings of geometric figures, including computing actual lengths and areas from a scale drawing and reproducing a scale drawing at a different scale."
+  },
+  {
+    "id": 5, "courseId": 7, "domainId": 2,
+    "title": "Apply and extend previous understandings of operations with fractions.",
+    "standardId": "CCSS.MATH.CONTENT.7.NS.A.1",
+    "description": "Apply and extend previous understandings of addition and subtraction to add and subtract rational numbers; represent addition and subtraction on a horizontal or vertical number line diagram."
+  }
+];
+var lastId = 5;
 
 var buildStandards = function() {
   // Make a deep copy so we don't change the main standards array
-  var rawStandards = JSON.parse(JSON.stringify(std));
-  var builtStandard = [];
+  var rawStandards = JSON.parse(JSON.stringify(standards));
+  var builtStandards = [];
   var standard;
 
   for(var i=0, l=rawStandards.length; i < l; i++) {
     standard = rawStandards[i];
-    standard.domain = std.get(standard.domainId);
-    builtStandard.push(standard);
+    standard.course = Course.get(standard.courseId);
+    standard.domain = Domain.get(standard.domainId);
+    builtStandards.push(standard);
   }
-  return builtStandard
-}
+  return builtStandards
+};
 
 module.exports = {
   get: function(id) {
-    return _.find(buildStandards(), function(std){
-      return std.id === id;
+    return _.find(buildStandards(), function(standard){
+      return standard.id === id;
     });
   },
   all: function() {
     return buildStandards();
   },
-
-}
+  update: function(standard) {
+    var updateStandard;
+    for(var i=0, l=standards.length; i < l; i++) {
+      if(standards[i].id === standard.id){
+        _.assign(standards[i], standard);
+        updateStandard = standards[i];
+        break;
+      }
+    }
+    return updateStandard;
+  },
+  delete: function(id) {
+    var deleteStandard;
+    for(var i=0, l=standards.length; i < l; i++) {
+      if(standards[i].id === id){
+        deleteStandard = standards[i];
+        standards.splice(i, 1);
+        break;
+      }
+    }
+    return deleteStandard;
+  },
+  create: function(standard) {
+    lastId += 1;
+    standard.id = lastId;
+    standards.push(standard);
+    return standard;
+  }
+};
