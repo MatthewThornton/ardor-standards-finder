@@ -1,5 +1,4 @@
-angular.module('MathFinder').controller('StandardIndexController', function(Standard, $scope){
-  console.log("The standards index controller: ", Standard);
-  $scope.standards = Standard.query();
-  $scope.search = {};
+angular.module('MathFinder').controller('StandardIndexController', function(){
+  console.log("The standards index controller reporting for duty... ");
+
 });
