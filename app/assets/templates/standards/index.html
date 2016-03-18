@@ -5,7 +5,7 @@
 
 <mf-domain-selector ng-model="search.domain"></mf-domain-selector>
 <div class="row">
-    <div ng-repeat="standard in standards">
+    <div ng-repeat="standard in standards | domainFilter:search.domain | filter:search.input" class="col-sm-6">
         <a title="{{standard.course.name}}" ng-href="#/standards/{{standard.id}}"><h3>{{standard.title}}</h3><h4>{{standard.standardId}}</h4></a>
         <p>{{standard.description}}</p>
         <p><span class="label label-info">{{standard.domain.name}}</span></p>
