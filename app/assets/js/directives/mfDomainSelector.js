@@ -10,7 +10,7 @@ angular.module('MathFinder').directive("mfDomainSelector", function(Domain){
 
       scope.isActive = function(domain){
         return activeDomain && activeDomain.id === domain.id;
-      }
+      };
 
       scope.toggleCategory = function(domain){
         if(domain === activeDomain) {
@@ -20,7 +20,7 @@ angular.module('MathFinder').directive("mfDomainSelector", function(Domain){
         }
 
         ngModelCtrl.$setViewValue(activeDomian);
-      }
+      };
 
       ngModelCtrl.$render = function() {
         activeDomain = ngModelCtrl.$viewValue;

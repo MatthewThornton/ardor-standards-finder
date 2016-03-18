@@ -2,5 +2,4 @@ angular.module('MathFinder').controller('StandardIndexController', function(Stan
   console.log("The standards index controller reporting for duty... ");
   $scope.standards = Standard.query();
   console.log($scope.standards);
-
 });

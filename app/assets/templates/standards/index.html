@@ -1,1 +1,13 @@
-<h1>Standards </h1>
+<h1>Standards</h1>
+<div class="form-group">
+    Search: <input type='text' ng-model="search.input.$">
+</div>
+
+
+<div class="row">
+    <div ng-repeat="standard in standards">
+        <h2><a title="{{standard.course.name}}" ng-href="#/notes/{{standard.id}}">{{standard.title}}</a></h2>
+        <p>{{standard.description}}</p>
+        <p><span class="label label-info">{{standard.domain.name}}</span></p>
+    </div>
+</div>
