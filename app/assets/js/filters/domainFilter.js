@@ -4,7 +4,7 @@ angular.module("MathFinder").filter('domainFilter', function(){
 
     if(domain && domain.id) {
       for(var i=0, l=domain.length; i < l; i++){
-        if(collection[i].domianID === domain.id) {
+        if(collection[i].domainId === domain.id) {
           newCollection.push(collection[i]);
         }
       }
